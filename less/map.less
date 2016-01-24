@@ -1,0 +1,164 @@
+@text-color: #fff;
+@highlight-color: #2a9fd6;
+@base-background-color: #222;
+@inactive-text-color: #888;
+@border-color: rgba(255, 255, 255, 0.1);
+@map-background-color: #151515;
+@border-size: 4px;
+
+// functions
+.overflow-scrolling(@v: touch) {
+	-webkit-overflow-scrolling: @v;
+	-moz-overflow-scrolling: @v;
+	-ms-overflow-scrolling: @v;
+	-o-overflow-scrolling: @v;
+	overflow-scrolling: @v;
+}
+.border-radius(@tl: @border-size, @tr: @border-size, @br: @border-size, @bl: @border-size) {
+	-webkit-border-radius: @arguments;
+	-moz-border-radius: @arguments;
+	-ms-border-radius: @arguments;
+	-o-border-radius: @arguments;
+	border-radius: @arguments;
+}
+.box-shadow(@nums: none) {
+	-webkit-box-shadow: @nums;
+	-moz-box-shadow: @nums;
+	box-shadow: @nums;
+}
+.border(@size: 1px, @style: solid, @color: @border-color) {
+	border: @arguments;
+}
+
+
+// basic navbar stuff
+.dropdown-menu > li > a {
+	cursor: pointer;
+}
+a.navbar-brand {
+	cursor: default;
+}
+
+// the map itself
+#map {
+	height: 100%;
+	min-height: 100%;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: -1;
+	background-color: @map-background-color;
+}
+
+// push the top of the relative page down a bit
+.navbar-fixed-top {
+	top: 16px;
+	
+	.container {
+		margin-top: 0;
+	}
+}
+body .container {
+	margin-top: 16px;
+}
+
+// stylize the zoom button to match bootstrap theme
+.leaflet-top .leaflet-control {
+	margin-top: 128px;
+}
+.leaflet-bar {
+	.box-shadow;
+	.border;
+	
+	a {
+		&, &:hover {
+			color: @text-color;
+			background-color: @base-background-color;
+			border-bottom: 1px solid #282828;
+		}
+		
+		&:hover {
+			background-color: @highlight-color;
+		}
+		&:last-child {
+			border-bottom: none;
+		}
+		&.leaflet-disabled {
+			background-color: @base-background-color;
+			color: @inactive-text-color;
+		}
+	}
+}
+
+// scroll menu, eg for area list in paradise-death
+ul.scroll-menu {
+	position: relative;
+	display: inherit !important;
+	overflow-x: auto;
+	.overflow-scrolling;
+	top: 0 !important;
+	left: 0 !important;
+	width: 100%;
+	height: auto;
+	max-height: 500px;
+	margin: 0;
+	border-left: none;
+	border-right: none;
+	.border-radius(0, 0, 0, 0) !important;
+}
+
+// sub-menus, eg every menu item in paradise-death except for All
+// uses code from http://bootsnipp.com/snippets/featured/multi-level-dropdown-menu-bs3
+.dropdown:hover > .dropdown-menu {
+	display: block;
+}
+.dropdown-submenu {
+	position: relative;
+	
+	& > .dropdown-menu {
+		top: 0;
+		left: 100%;
+		margin-top: -6px;
+		margin-left: -1px;
+		.border-radius(@tl: 0);
+	}
+	&:hover > .dropdown-menu {
+		display: block;
+	}
+	
+	// add a little arrow on the right
+	& > a:after {
+		display: block;
+		content: " ";
+		float: right;
+		width: 0;
+		height: 0;
+		border-color: transparent;
+		border-style: solid;
+		border-width: 5px 0 5px 5px;
+		border-left-color: @text-color;
+		margin-top: 5px;
+		margin-right: -10px;
+	}
+	
+	.pull-left {
+		float: none;
+		
+		& > .dropdown-menu {
+			left: -100%;
+			margin-left: 10px;
+			.border-radius(@tr: 0);
+		}
+	}
+}
+
+// for RBI map or any other future ones that have markers
+.vmarker {
+	@glow-color: rgba(255, 255, 255, 0.25);
+	background: @glow-color;
+	.box-shadow(0px 0px 4px 2px @glow-color);
+	.border-radius;
+}
