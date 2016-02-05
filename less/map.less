@@ -14,7 +14,14 @@
 	-o-overflow-scrolling: @v;
 	overflow-scrolling: @v;
 }
-.border-radius(@tl: @border-size, @tr: @border-size, @br: @border-size, @bl: @border-size) {
+.border-radius(@tl: @border-size, @tr: @border-size, @br: @border-size, @bl: @border-size) when (@tl = @tr) and (@tl = @br) and (@tl = @bl) {
+	-webkit-border-radius: @tl;
+	-moz-border-radius: @tl;
+	-ms-border-radius: @tl;
+	-o-border-radius: @tl;
+	border-radius: @tl;
+}
+.border-radius(@tl: @border-size, @tr: @border-size, @br: @border-size, @bl: @border-size) when not (@tl = @tr), not (@tl = @br), not (@tl = @bl) {
 	-webkit-border-radius: @arguments;
 	-moz-border-radius: @arguments;
 	-ms-border-radius: @arguments;
