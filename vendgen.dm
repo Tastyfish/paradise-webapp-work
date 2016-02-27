@@ -143,6 +143,8 @@ client/verb/gen_special_all()
 	gen_special_mapall("wires", list(/obj/structure/cable, /obj/machinery/power))
 	world << "*** Generating DISPOSAL ***"
 	gen_special_mapall("disposals", list(/obj/structure/disposalpipe, /obj/structure/disposaloutlet, /obj/machinery/disposal))
+	world << "*** Generating ATMOS ***"
+	gen_special_mapall("atmos", list(/obj/machinery/atmospherics, /obj/machinery/portable_atmospherics))
 	
 // generate ALL MAP TILES
 client/proc/gen_special_mapall(path, list/types)
